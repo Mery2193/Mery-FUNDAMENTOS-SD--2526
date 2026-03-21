@@ -1,0 +1,48 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity TB_ALU_SIMPLE is
+end TB_ALU_SIMPLE;
+
+architecture prueba of TB_ALU_SIMPLE is
+
+    component ALU_SIMPLE
+        Port (
+            A : in STD_LOGIC_VECTOR(7 downto 0);
+            B : in STD_LOGIC_VECTOR(7 downto 0);
+            SEL : in STD_LOGIC_VECTOR(1 downto 0);
+            RESULT : out STD_LOGIC_VECTOR(7 downto 0)
+        );
+    end component;
+
+    signal A : STD_LOGIC_VECTOR(7 downto 0);
+    signal B : STD_LOGIC_VECTOR(7 downto 0);
+    signal SEL : STD_LOGIC_VECTOR(1 downto 0);
+    signal RESULT : STD_LOGIC_VECTOR(7 downto 0);
+
+begin
+
+    U1: ALU_SIMPLE port map(A, B, SEL, RESULT);
+
+    process
+    begin
+        A <= "00001111";
+        B <= "00110011";
+
+        SEL <= "00";
+        wait for 10 ns;
+
+        SEL <= "01";
+        wait for 10 ns;
+
+        SEL <= "10";
+        wait for 10 ns;
+
+        SEL <= "11";
+        wait for 10 ns;
+
+        wait;
+    end process;
+
+end architecture prueba;
