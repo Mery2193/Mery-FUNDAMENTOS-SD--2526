@@ -1,0 +1,30 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity ALU_SIMPLE is
+    Port (
+        A : in STD_LOGIC_VECTOR(7 downto 0);
+        B : in STD_LOGIC_VECTOR(7 downto 0);
+        SEL : in STD_LOGIC_VECTOR(1 downto 0);
+        RESULT : out STD_LOGIC_VECTOR(7 downto 0)
+    );
+end ALU_SIMPLE;
+
+architecture simple of ALU_SIMPLE is
+begin
+
+    process(A, B, SEL)
+    begin
+        if SEL = "00" then
+            RESULT <= A and B;
+        elsif SEL = "01" then
+            RESULT <= A or B;
+        elsif SEL = "10" then
+            RESULT <= std_logic_vector(unsigned(A) + unsigned(B));
+        else
+            RESULT <= A(3 downto 0) & B(3 downto 0);
+        end if;
+    end process;
+
+end simple;
