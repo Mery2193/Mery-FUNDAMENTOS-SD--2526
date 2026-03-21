@@ -1,0 +1,66 @@
+--=====================================================
+-- TESTBENCH DEL SUMADOR COMPLETO
+-- Banco de pruebas encargado de verificar el
+-- funcionamiento del Full Adder evaluando todas
+-- las combinaciones posibles de entrada.
+--=====================================================
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity tb_fulladder is
+end tb_fulladder;
+
+architecture Simulation of tb_fulladder is
+
+-- Declaración del componente a probar
+component FullAdder
+Port(
+    C   : in STD_LOGIC;
+    D   : in STD_LOGIC;
+    Cin : in STD_LOGIC;
+    S   : out STD_LOGIC;
+    Cout: out STD_LOGIC
+);
+end component;
+
+-- Señales internas para estímulos
+signal C_tb   : STD_LOGIC := '0';
+signal D_tb   : STD_LOGIC := '0';
+signal Cin_tb : STD_LOGIC := '0';
+
+signal S_tb   : STD_LOGIC;
+signal Cout_tb: STD_LOGIC;
+
+begin
+
+-- Instanciación del dispositivo bajo prueba
+DUT: FullAdder
+port map(
+    C => C_tb,
+    D => D_tb,
+    Cin => Cin_tb,
+    S => S_tb,
+    Cout => Cout_tb
+);
+
+-- Proceso que genera las combinaciones de prueba
+process
+begin
+
+    -- Se prueban las 8 combinaciones posibles
+    C_tb <= '0'; D_tb <= '0'; Cin_tb <= '0'; wait for 10 ns;
+    C_tb <= '0'; D_tb <= '0'; Cin_tb <= '1'; wait for 10 ns;
+    C_tb <= '0'; D_tb <= '1'; Cin_tb <= '0'; wait for 10 ns;
+    C_tb <= '0'; D_tb <= '1'; Cin_tb <= '1'; wait for 10 ns;
+    C_tb <= '1'; D_tb <= '0'; Cin_tb <= '0'; wait for 10 ns;
+    C_tb <= '1'; D_tb <= '0'; Cin_tb <= '1'; wait for 10 ns;
+    C_tb <= '1'; D_tb <= '1'; Cin_tb <= '0'; wait for 10 ns;
+    C_tb <= '1'; D_tb <= '1'; Cin_tb <= '1'; wait for 10 ns;
+
+    -- Finaliza la simulación
+    wait;
+
+end process;
+
+end Simulation;
