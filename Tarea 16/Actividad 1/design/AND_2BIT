@@ -1,0 +1,25 @@
+-- ==============================
+-- LIBRERÍAS
+-- ==============================
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+-- ==============================
+-- ENTIDAD (INTERFAZ DEL CIRCUITO)
+-- ==============================
+entity AND_2 is
+    Port (
+        A : in STD_LOGIC;  -- Entrada A
+        B : in STD_LOGIC;  -- Entrada B
+        Y : out STD_LOGIC  -- Salida Y
+    );
+end AND_2;
+
+-- ==============================
+-- ARQUITECTURA (COMPORTAMIENTO)
+-- ==============================
+architecture Behavioral of AND_2 is
+begin
+    -- Operación lógica AND
+    Y <= A AND B;
+end Behavioral;
