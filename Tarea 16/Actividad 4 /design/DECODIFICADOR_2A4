@@ -1,0 +1,31 @@
+-- ============================================
+-- LIBRERÍAS
+-- ============================================
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- ============================================
+-- ENTIDAD (DEFINICIÓN DEL CIRCUITO)
+-- ============================================
+entity DECODIFICADOR_2A4 is
+    Port (
+        A : in STD_LOGIC_VECTOR(1 downto 0); -- Entrada de 2 bits
+        Y : out STD_LOGIC_VECTOR(3 downto 0) -- Salidas (4 líneas)
+    );
+end DECODIFICADOR_2A4;
+
+-- ============================================
+-- ARQUITECTURA (IMPLEMENTACIÓN)
+-- ============================================
+architecture DATAFLOW of DECODIFICADOR_2A4 is
+begin
+
+    -- ========================================
+    -- LÓGICA DEL DECODIFICADOR (FLUJO DE DATOS)
+    -- ========================================
+    Y <= "0001" when A = "00" else
+         "0010" when A = "01" else
+         "0100" when A = "10" else
+         "1000"; -- cuando A = "11"
+
+end DATAFLOW;
