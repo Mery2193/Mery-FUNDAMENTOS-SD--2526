@@ -1,0 +1,51 @@
+-- ==============================
+-- LIBRERÍAS
+-- ==============================
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+-- ==============================
+-- ENTIDAD TESTBENCH
+-- ==============================
+entity TB_SUMADOR_2BIT is
+end TB_SUMADOR_2BIT;
+
+-- ==============================
+-- ARQUITECTURA
+-- ==============================
+architecture Behavioral of TB_SUMADOR_2BIT is
+
+    component SUMADOR_2BIT
+        Port (
+            A : in STD_LOGIC_VECTOR (1 downto 0);
+            B : in STD_LOGIC_VECTOR (1 downto 0);
+            S : out STD_LOGIC_VECTOR (2 downto 0)
+        );
+    end component;
+
+    -- SEÑALES
+    signal A_tb : STD_LOGIC_VECTOR (1 downto 0) := "00";
+    signal B_tb : STD_LOGIC_VECTOR (1 downto 0) := "00";
+    signal S_tb : STD_LOGIC_VECTOR (2 downto 0);
+
+begin
+
+    -- INSTANCIA
+    UUT: SUMADOR_2BIT
+        Port map (
+            A => A_tb,
+            B => B_tb,
+            S => S_tb
+        );
+
+    -- ESTÍMULOS
+    process
+    begin
+        A_tb <= "00"; B_tb <= "00"; wait for 10 ns; -- 000
+        A_tb <= "01"; B_tb <= "01"; wait for 10 ns; -- 010
+        A_tb <= "10"; B_tb <= "01"; wait for 10 ns; -- 011
+        A_tb <= "11"; B_tb <= "01"; wait for 10 ns; -- 100
+        wait;
+    end process;
+
+end Behavioral;
