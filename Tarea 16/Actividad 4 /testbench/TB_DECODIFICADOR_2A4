@@ -1,0 +1,68 @@
+-- ============================================
+-- LIBRERÍAS
+-- ============================================
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- ============================================
+-- ENTIDAD DEL TESTBENCH (SIN PUERTOS)
+-- ============================================
+entity TB_DECODIFICADOR_2A4 is
+end TB_DECODIFICADOR_2A4;
+
+-- ============================================
+-- ARQUITECTURA DEL TESTBENCH
+-- ============================================
+architecture BEHAVIOR of TB_DECODIFICADOR_2A4 is
+
+    -- ========================================
+    -- SEÑALES INTERNAS
+    -- ========================================
+    signal A : STD_LOGIC_VECTOR(1 downto 0);
+    signal Y : STD_LOGIC_VECTOR(3 downto 0);
+
+begin
+
+    -- ========================================
+    -- INSTANCIACIÓN DEL DISEÑO
+    -- ========================================
+    UUT: entity work.DECODIFICADOR_2A4
+        port map (
+            A => A,
+            Y => Y
+        );
+
+    -- ========================================
+    -- PROCESO DE ESTÍMULOS
+    -- ========================================
+    stim_proc: process
+    begin
+
+        -- Caso 00
+        A <= "00";
+        wait for 10 ns;
+        assert Y = "0001"
+        report "Error en 00" severity error;
+
+        -- Caso 01
+        A <= "01";
+        wait for 10 ns;
+        assert Y = "0010"
+        report "Error en 01" severity error;
+
+        -- Caso 10
+        A <= "10";
+        wait for 10 ns;
+        assert Y = "0100"
+        report "Error en 10" severity error;
+
+        -- Caso 11
+        A <= "11";
+        wait for 10 ns;
+        assert Y = "1000"
+        report "Error en 11" severity error;
+
+        -- Fin de simulación
+        wait;
+    end process;
+end BEHAVIOR;
