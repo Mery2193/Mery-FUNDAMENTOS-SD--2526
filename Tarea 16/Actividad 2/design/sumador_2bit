@@ -1,0 +1,35 @@
+-- ==============================
+-- LIBRERÍAS
+-- ==============================
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+-- ==============================
+-- ENTIDAD
+-- ==============================
+entity SUMADOR_2BIT is
+    Port (
+        A : in STD_LOGIC_VECTOR (1 downto 0);
+        B : in STD_LOGIC_VECTOR (1 downto 0);
+        S : out STD_LOGIC_VECTOR (2 downto 0) -- RESULTADO DE 3 BITS
+    );
+end SUMADOR_2BIT;
+
+-- ==============================
+-- ARQUITECTURA
+-- ==============================
+architecture Behavioral of SUMADOR_2BIT is
+begin
+
+    process(A, B)
+        variable temp : INTEGER;
+    begin
+        -- Suma
+        temp := to_integer(unsigned(A)) + to_integer(unsigned(B));
+
+        -- Resultado completo (incluye acarreo)
+        S <= std_logic_vector(to_unsigned(temp, 3));
+    end process;
+
+end Behavioral;
